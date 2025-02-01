@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Electron Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    #calculator {
+      width: 300px;
+      margin: 50px auto;
+      padding: 10px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #display {
+      width: 280px;
+      height: 40px;
+      margin-bottom: 10px;
+      padding: 5px;
+      font-size: 1.5em;
+      text-align: right;
+    }
+    .btn {
+      width: 60px;
+      height: 60px;
+      font-size: 1.2em;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <!-- Calculator display -->
+    <input type="text" id="display" disabled>
+    <br>
+    <!-- Calculator buttons -->
+    <input type="button" class="btn" value="7">
+    <input type="button" class="btn" value="8">
+    <input type="button" class="btn" value="9">
+    <input type="button" class="btn" value="/">
+    <br>
+    <input type="button" class="btn" value="4">
+    <input type="button" class="btn" value="5">
+    <input type="button" class="btn" value="6">
+    <input type="button" class="btn" value="*">
+    <br>
+    <input type="button" class="btn" value="1">
+    <input type="button" class="btn" value="2">
+    <input type="button" class="btn" value="3">
+    <input type="button" class="btn" value="-">
+    <br>
+    <input type="button" class="btn" value="0">
+    <input type="button" class="btn" value=".">
+    <input type="button" class="btn" value="=">
+    <input type="button" class="btn" value="+">
+    <br>
+    <input type="button" class="btn" value="C">
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const value = button.value;
+        if (value === 'C') {
+          // Clear the display
+          display.value = '';
+        } else if (value === '=') {
+          // Evaluate the expression
+          try {
+            display.value = eval(display.value);
+          } catch (error) {
+            display.value = 'Error';
+          }
+        } else {
+          // Append the button value to the display
+          display.value += value;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
